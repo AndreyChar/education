@@ -1,8 +1,6 @@
 from fastapi import APIRouter
 
-
 router = APIRouter(tags=["Стажировка"])
-
 
 """
 Задание_1. Удаление дублей
@@ -15,10 +13,28 @@ router = APIRouter(tags=["Стажировка"])
     Список слов для примера: ['Мама', 'МАМА', 'Мама', 'папа', 'ПАПА', 'Мама', 'ДЯдя', 'брАт', 'Дядя', 'Дядя', 'Дядя']
     Ожидаемый результат: ['папа','брат']
 """
+
+
 @router.post("/find_in_different_registers", description="Задание_1. Удаление дублей")
 async def find_in_different_registers(words: list[str]) -> list[str]:
     """Описание."""
-
+    for i, word in enumerate(words):
+        words[i] = word.lower()
     result = []
-
+    for i, word in enumerate(words):
+        print(word)
+        # wrd = word.lower()
+        safe = 1
+        for j, word2 in enumerate(words):
+            print(i)
+            if word2 == word:
+                if safe == 0:
+                    print('!')
+                    break
+                else:
+                    safe = safe - 1
+            if j == len(words) - 1:
+                # print('yes!')
+                result.append(word)
+    # print(result)
     return result
