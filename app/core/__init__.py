@@ -3,11 +3,84 @@ from io import StringIO
 
 
 def convert_arabic_to_roman(number: int) -> str:
-    pass
+    print(number)
+    m: int = number // 1000
+    s: str = ""
+    s = s + "M" * m
+    mr: int = number % 1000
+    print(mr)
+    c: int = mr // 100
+    if c == 9:
+        s = s + "CM"
+    elif 5 <= c < 9:
+        s = s + "D" + "C" * (c-5)
+    elif c == 4:
+        s = s + "CD"
+    else:
+        s = s + "C" * c
+    cr: int = mr % 100
+    print(cr)
+    x: int = cr // 10
+    if x == 9:
+        s = s + "XC"
+    elif 5 <= x < 9:
+        s = s + "L" + "X" * (x-5)
+    elif x == 4:
+        s = s + "XL"
+    else:
+        s = s + "X" * x
+    xr: int = cr % 10
+    print(xr)
+    i: int = xr
+    if i == 9:
+        s = s + "IX"
+    elif 5 <= i < 9:
+        s = s + "V" + "I" * (i - 5)
+    elif i == 4:
+        s = s + "IV"
+    else:
+        s = s + "I" * i
+    return s
+
 
 
 def convert_roman_to_arabic(number: str) -> int:
-    pass
+    i = 0
+    for j in range(len(number)):
+        match number[j]:
+            case 'I':
+                i = i + 1
+            case 'V':
+                i = i + 5
+                if j != 0:
+                    if number[j-1] == 'I':
+                        i = i - 2
+            case 'X':
+                i = i + 10
+                if j != 0:
+                    if number[j - 1] == 'I':
+                        i = i - 2
+            case 'L':
+                i = i + 50
+                if j != 0:
+                    if number[j - 1] == 'X':
+                        i = i - 20
+            case 'C':
+                i = i + 100
+                if j != 0:
+                    if number[j - 1] == 'X':
+                        i = i - 20
+            case 'D':
+                i = i + 500
+                if j != 0:
+                    if number[j - 1] == 'C':
+                        i = i - 200
+            case 'M':
+                i = i + 1000
+                if j != 0:
+                    if number[j - 1] == 'C':
+                        i = i - 200
+    return i
 
 
 def average_age_by_position(file):

@@ -20,7 +20,7 @@ async def find_in_different_registers(words: list[str]) -> list[str]:
     """Описание."""
     for i, word in enumerate(words):
         words[i] = word.lower()
-    result = []
+    result: list[str] = []
     for i, word in enumerate(words):
         print(word)
         # wrd = word.lower()
@@ -36,5 +36,6 @@ async def find_in_different_registers(words: list[str]) -> list[str]:
             if j == len(words) - 1:
                 # print('yes!')
                 result.append(word)
-    # print(result)
+    print(result)
     return result
+# uvicorn app.main:app --reload --app-dir ./app
